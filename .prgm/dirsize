@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Get the size of a directory in human readable format.
+
+if [ $# -ne 1 ]; then
+    echo "Directory required as argument" >&2
+    exit 1
+elif ! [ -d "$1" ]; then
+    echo "Directory does not exist" >&2
+    exit 1
+fi
+
+# Let BASH exit with an error on any simple command.
+set -e
+# Let BASH exit with an error on any command in a pipeline.
+set -o pipefail
+
+du -ch "$1" | grep total | awk '{ print $1 }'
+if [ $? != 0 ]; then
+    echo "Failed to get size of directory" >&2
+    exit 1
+fi
+
+exit 0

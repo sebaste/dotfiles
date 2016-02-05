@@ -1,0 +1,69 @@
+# Object files.
+*.class
+*.com
+*.elf
+*.lo
+*.o
+*.obj
+*.slo
+
+# Pre-compiled headers.
+*.gch
+*.pch
+
+# Python: byte-compiled/optimized files.
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Compiled dynamic libraries.
+*.dll
+*.dylib
+*.so
+*.so.*
+
+# Compiled static libraries.
+*.a
+*.la
+*.lai
+*.lib
+*.lo
+
+# Executables.
+*.app
+*.exe
+*.hex
+*.i*86
+*.out
+*.x86_64
+
+# Debug files.
+*.dSYM/
+
+# Archive files.
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+# Logs and databases.
+*.log
+*.sql
+*.sqlite
+
+# Linux trash folder which might appear on any partitiion/disk.
+.Trash-*
+
+# Vim-specific files.
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~

@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Get all files recursively in directory 1 and create symlinks to them in directory 2.
+
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 [directory to go through recursively] [directory where to put the symlinks]" >&2
+    exit 1
+elif ! [ -d $1 ]; then
+    echo "Directory $1 does not exist" >&2
+    exit 1
+elif ! [ -d $2 ]; then
+    echo "Directory $2 does not exist" >&2
+    exit 1
+fi
+
+_MAX_DEPTH=16
+_ABS_PATH=`cd "$1"; pwd`
+files=`find $_ABS_PATH -maxdepth $_MAX_DEPTH -mindepth 1 -type f`
+for f in $files; do
+    filename=`basename $f`
+    ln -s "$f" "$2/$filename"
+done
+
+if [ $? != 0 ]; then
+    exit 1
+fi
+
+exit 0

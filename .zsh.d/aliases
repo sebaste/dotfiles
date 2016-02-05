@@ -1,0 +1,5 @@
+alias srcz="source ~/.zshrc"
+# Avoid corrections for certain programs.
+alias mkdir="nocorrect mkdir"
+alias mv="nocorrect mv"
+alias man="nocorrect man"

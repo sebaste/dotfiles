@@ -1,0 +1,76 @@
+#!/bin/bash
+
+function _line_is_valid {
+    local _LINE=$1
+    if [[ ${_LINE:0:1} == '#' ]] || [ -z "$_LINE" ]; then
+        return 1
+    fi
+    return 0
+}
+
+function _export_from_prio_list {
+    local _EXPORT_NAME=$1
+    local _FILENAME=$2
+    if [ -f $_FILENAME ]; then
+        local _LINE
+        while read _LINE; do
+            _line_is_valid "$_LINE"
+            if [ "$?" != "0" ]; then
+                continue
+            fi
+            if `hash "${_LINE}" 2>/dev/null`; then
+                export "${_EXPORT_NAME}"="${_LINE}"
+                break
+            fi
+        done < $_FILENAME
+    fi
+}
+
+function _read_aliases_file {
+    local _FILENAME=$1
+    if [ -f $_FILENAME ]; then
+        local _LINE
+        local _TOKENS
+        local _REM
+        while read _LINE; do
+            _line_is_valid "$_LINE"
+            if [ "$?" != "0" ]; then
+                continue
+            fi
+            _TOKENS=($_LINE)
+            if [[ ${#_TOKENS[@]} -ge 1 ]]; then
+                _REM=${_TOKENS[@]:1}
+                alias ${_TOKENS[0]}="$_REM"
+            fi
+        done < $_FILENAME
+    fi
+}
+
+function _read_env_file {
+    local _FILENAME=$1
+    if [ -f $_FILENAME ]; then
+        local _LINE
+        local _TOKENS
+        local _REM
+        while read _LINE; do
+            _line_is_valid "$_LINE"
+            if [ "$?" != "0" ]; then
+                continue
+            fi
+            _TOKENS=($_LINE)
+            if [[ ${#_TOKENS[@]} -ge 1 ]]; then
+                # Extend variables.
+                _REM=$(eval "echo \"${_TOKENS[@]:1}\"")
+                # Replace '~' with $HOME.
+                _REM="${_REM/#\~/$HOME}"
+                if [[ -n $2 ]] && [[ $2 == "ANSI-C" ]]; then
+                    # Emulate ANSI-C string processing, for correct exporting of escape sequences.
+                    # Corresponding functionality in Bash/ZSH: $'<escape sequence>'.
+                    export "${_TOKENS[0]}"=`echo -e $_REM`
+                else
+                    export "${_TOKENS[0]}"="$_REM"
+                fi
+            fi
+        done < $_FILENAME
+    fi
+}

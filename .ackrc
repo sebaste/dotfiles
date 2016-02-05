@@ -1,0 +1,4 @@
+# Case-sensitive search only when the string consists of other than lowercase characters.
+--smart-case
+
+--sort-files

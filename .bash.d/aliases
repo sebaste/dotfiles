@@ -1,0 +1,3 @@
+alias srcb="source ~/.bashrc"
+alias sudob="sudo -b "
+alias sudo="sudo "
