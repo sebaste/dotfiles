@@ -115,3 +115,4 @@ fi
 }
 
 main
+unset -f main
