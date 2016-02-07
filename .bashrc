@@ -60,8 +60,6 @@ _read_env_file "${_SHELLS_DIR}/env.dirs.home"
 _read_env_file "${_SHELLS_DIR}/env.dirs"
 _read_env_file "${_SHELLS_DIR}/env.grep"
 _read_env_file "${_SHELLS_DIR}/env.path"
-# Specify a hash entry for the $PRGM directory. This lets you type "~<hash tag> to get to this directory.
-#hash -d prgm=$PRGM
 _read_env_file "${_SHELLS_DIR}/local.env"
 
 local _TERM_NM_COLORS=0
@@ -93,7 +91,7 @@ fi
 
 if [[ $PAGER == "less" ]]; then
     # Less filter for viewing non-text files.
-    if `hash lesspipe`; then
+    if `hash lesspipe 2>/dev/null`; then
         eval "$(SHELL=bin/sh lesspipe)"
     fi
     if [[ $_CHARMAP == "UTF-8" ]]; then

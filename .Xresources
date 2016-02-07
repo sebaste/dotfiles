@@ -7,7 +7,7 @@ xft*hintstyle: hintslight
 xft*autohint: 1
 xft*lcdfilter: lcddefault
 
-xterm*faceName: Latin Modern Mono Light 10 Regular:size=12
+xterm*faceName: Latin Modern Mono:size=12
 xterm*termName: xterm-256color
 xterm*VT100.geometry: 100x60
 xterm*foreground: white
