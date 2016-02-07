@@ -34,14 +34,14 @@ myBorderWidth = 2
 -- The modMask to use (mod4Mask is the Tux/Super key). Note: mod1key equals modm.
 mod1key = mod4Mask 
 -- The key to be used in combination with the modMask.
-mod2    = shiftMask
+mod2 = shiftMask
 -- Used for key sequences.
-mod3    = controlMask
+mod3 = controlMask
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
--- Border color for unfocused windows.
-myNormalBorderColor  = "#000000"
+-- Border color for unfocused window(s).
+myNormalBorderColor  = "#0A0A0A"
 -- Border color for focused window.
 myFocusedBorderColor = "#2973bc"
 
@@ -65,39 +65,35 @@ keys' conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,             xK_F8    ), sendMessage $ JumpToLayout "Layout4")
     , ((modm,             xK_F9    ), sendMessage $ JumpToLayout "Layout5")
     , ((modm,             xK_F10   ), sendMessage $ JumpToLayout "Layout6")
-    , ((modm,             xK_F11   ), sendMessage $ JumpToLayout "Layout7")
-    , ((modm,             xK_F12   ), sendMessage $ JumpToLayout "Layout8")
     -- Reset the layouts on the current workspace to default.
     , ((modm .|. mod2,    xK_space ), setLayout $ XMonad.layoutHook conf)
     -- Move focus to the next window.
-    , ((modm,             xK_Left  ), windows W.focusDown)
+    , ((modm,             xK_l     ), windows W.focusDown)
     -- Move focus to the previous window.
-    , ((modm,             xK_Right ), windows W.focusUp)
+    , ((modm,             xK_h     ), windows W.focusUp)
     -- Move focus to the master window.
     , ((modm .|. mod2,    xK_Tab   ), windows W.focusMaster)
     -- Swap the focused window and the master window.
     , ((modm,             xK_Tab), windows W.swapMaster)
     -- Swap the focused window with the next window.
-    , ((modm,             xK_r     ), windows W.swapDown)
+    , ((modm,             xK_q     ), windows W.swapDown)
     -- Swap the focused window with the previous window.
-    , ((modm,             xK_e     ), windows W.swapUp)
-    -- Shrink the master area.
-    , ((modm,             xK_Delete), sendMessage Shrink)
+    , ((modm,             xK_a     ), windows W.swapUp)
     -- Expand the master area.
-    , ((modm,             xK_Home), sendMessage Expand)
-    -- Resize viewed windows to the correct size.
-    , ((modm,             xK_q     ), refresh)
+    , ((modm,             xK_w     ), sendMessage Expand)
+    -- Shrink the master area.
+    , ((modm,             xK_s     ), sendMessage Shrink)
     -- Push window back into tiling.
     , ((modm,             xK_BackSpace), withFocused $ windows . W.sink)
     -- Increment the number of windows in the master area.
-    , ((modm,             xK_d     ), sendMessage (IncMasterN 1))
+    , ((modm,             xK_e     ), sendMessage (IncMasterN 1))
     -- Decrement the number of windows in the master area.
-    , ((modm,             xK_f     ), sendMessage (IncMasterN (-1)))
+    , ((modm,             xK_d     ), sendMessage (IncMasterN (-1)))
 
     -- Move focus to the left screen.
-    , ((modm,             xK_Up    ), prevScreen)
+    , ((modm,             xK_k     ), prevScreen)
     -- Move focus to the right screen.
-    , ((modm,             xK_Down  ), nextScreen)
+    , ((modm,             xK_j     ), nextScreen)
 
     -- Quit xmonad.
     , ((modm .|. mod2,    xK_Escape), io (exitWith ExitSuccess))
@@ -107,24 +103,22 @@ keys' conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Start programs.
     -- Uses mod1-shift, while keySeqs uses mod1-ctrl.
     , ((modm .|. mod2,    xK_a     ), spawn "audacious")
+    , ((modm .|. mod2,    xK_b     ), spawn "chromium")
     , ((modm .|. mod2,    xK_c     ), spawn (terminal'++" calc"))
-    , ((modm .|. mod2,    xK_f     ), spawn "chromium")
-    , ((modm .|. mod2,    xK_g     ), spawn "gimp")
+    , ((modm .|. mod2,    xK_f     ), spawn "filezilla")
     , ((modm .|. mod2,    xK_h     ), spawn (terminal'++" hexedit"))
+    , ((modm .|. mod2,    xK_i     ), spawn "gimp")
     , ((modm .|. mod2,    xK_m     ), spawn "mirage")
-    , ((modm .|. mod2,    xK_n     ), spawn "nvidia-settings")
     , ((modm .|. mod2,    xK_p     ), spawn "evince")
-    , ((modm .|. mod2,    xK_q     ), spawn "deluge")
+    , ((modm .|. mod2,    xK_t     ), spawn "deluge")
     , ((modm .|. mod2,    xK_v     ), spawn "vlc")
     , ((modm .|. mod2,    xK_w     ), spawn (terminal'++" wicd-curses"))
-    , ((modm .|. mod2,    xK_z     ), spawn "filezilla")
     , ((modm .|. mod2,    xK_x     ), spawn (terminal'++" alsamixer"))
 
     -- Volume settings.
     , ((modm,             xK_KP_Add), spawn "amixer set Master 2dB+")
     , ((modm,             xK_KP_Subtract), spawn "amixer set Master 2dB-")
 
-    -- FIXME: Bindings to all remaining letters (to avoid mishaps).
     ]
     ++
 
@@ -180,12 +174,12 @@ numpadKeys =
       xK_KP_Insert ]                            -- 0
 
 mouseBindings' (XConfig {XMonad.modMask = modm}) = M.fromList $
-    -- mod-button1, Set the window to floating mode and move by dragging.
+    -- Set the window to floating mode and move by dragging.
     [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
                                        >> windows W.shiftMaster))
-    -- mod-button2, Raise the window to the top of the stack.
+    -- Raise the window to the top of the stack.
     , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
-    -- mod-button3, Set the window to floating mode and resize by dragging.
+    -- Set the window to floating mode and resize by dragging.
     , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
                                        >> windows W.shiftMaster))
     ]
@@ -194,12 +188,10 @@ layout' =
     smartBorders $
                named "Layout1"            (Tall 1 (3/100) (60/100))
            ||| named "Layout2"            (Tall 2 (3/100) (50/100))
-           ||| named "Layout3" (Mirror    (Tall 1 (3/100) (60/100)))
-           ||| named "Layout4" (Mirror    (Tall 2 (3/100) (50/100)))
-           ||| named "Layout5" (magnifier (Tall 1 (3/100) (50/100)))
-           ||| named "Layout6" (StackTile       1 (3/100) (50/100))
-           ||| named "Layout7" (tabbed shrinkText defaultTheme)
-           ||| named "Layout8" Full
+           ||| named "Layout3" (Mirror    (Tall 2 (3/100) (50/100)))
+           ||| named "Layout4" (magnifier (Tall 1 (3/100) (50/100)))
+           ||| named "Layout5" (tabbed shrinkText defaultTheme)
+           ||| named "Layout6" Full
 
 -- Window rules.
 manageHook' = composeAll
