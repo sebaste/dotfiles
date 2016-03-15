@@ -109,6 +109,7 @@ keys' conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. mod2,    xK_h     ), spawn (terminal'++" hexedit"))
     , ((modm .|. mod2,    xK_i     ), spawn "gimp")
     , ((modm .|. mod2,    xK_m     ), spawn "mirage")
+    , ((modm .|. mod2,    xK_n     ), spawn "nemo")
     , ((modm .|. mod2,    xK_p     ), spawn "evince")
     , ((modm .|. mod2,    xK_t     ), spawn "deluge")
     , ((modm .|. mod2,    xK_v     ), spawn "vlc")
