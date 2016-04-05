@@ -1,13 +1,13 @@
 (custom-set-variables
- '(blink-cursor nil)
- '(menu-bar-mode 0)
- '(delete-key-deletes-forward t)
- '(line-number-mode t)
- '(column-number-mode t)
- '(inhibit-startup-screen t)
- '(initial-scratch-message nil)
- '(initial-buffer-choice nil)
- )
+    '(blink-cursor nil)
+    '(menu-bar-mode 0)
+    '(delete-key-deletes-forward t)
+    '(line-number-mode t)
+    '(column-number-mode t)
+    '(inhibit-startup-screen t)
+    '(initial-scratch-message nil)
+    '(initial-buffer-choice nil)
+)
 
 (setq default-tab-width 4)
 
