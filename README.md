@@ -72,6 +72,6 @@ The start-up sequence is unified for all shells and consists of the following st
 
 ### Dir colors
 
-Example demonstrating the dircolors configuration of this setup:
+Example demonstrating the dircolors configuration:
 
 ![alt text](https://github.com/sebaste/dotfiles/raw/master/images/dir_colors.png "Dir colors example")
