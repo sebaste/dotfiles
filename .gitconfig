@@ -8,9 +8,6 @@
     compression = -1
     excludesfile = ~/.gitignore
 
-[init]
-    templatedir = ~/.git_template
-
 [branch]
     autosetupmerge = always
     autosetuprebase = always
