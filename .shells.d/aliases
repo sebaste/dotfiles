@@ -21,6 +21,7 @@ kk          kill -9
 la          ls -lsahF
 lc          locate
 l           ls -lshFB
+less        less -R
 lr          ls -lshFBR
 ls          ls --color=auto
 mc          make clean
