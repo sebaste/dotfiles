@@ -1,4 +1,4 @@
-#Sebaste's dotfiles
+# Sebaste's dotfiles
 
 A collection of dot files for Linux, where a unified approach has been taken for the shells CSH, TCSH, Bash and ZSH.
 
@@ -55,18 +55,19 @@ The start-up sequence is unified for all shells and consists of the following st
 30. If the terminal color support is 8 colors or more and if colordiff exists, alias diff to colordiff.
 31. Get the charmap using locale.
 32. Set the prompt.
-  1. If the charmap is UTF-8, set the prompt user and root symbols (corresponding to the commonly used '$' or '#' at the right end) from *.shells.d/prompt.user.unicode-s* for user and *.shells.d/prompt.root.unicode-s* for root. Otherwise, set these symbols from *.shells.d/prompt.user-s* for user and *.shells.d/prompt.root-s* for root.
-  2. For the given number of colors that the terminal supports, set the prompt error code color for this number, from the prompt error code file *.shells.d/prompt.errcode.[NUMBER OF COLORS]-s*. The supported colors are 256, 88, 8 and 0.
-  3. Set the prompt to this format:
+    1. If the charmap is UTF-8, set the prompt user and root symbols (corresponding to the commonly used '$' or '#' at the right end) from *.shells.d/prompt.user.unicode-s* for user and *.shells.d/prompt.root.unicode-s* for root. Otherwise, set these symbols from *.shells.d/prompt.user-s* for user and *.shells.d/prompt.root-s* for root.
+    2. For the given number of colors that the terminal supports, set the prompt error code color for this number, from the prompt error code file *.shells.d/prompt.errcode.[NUMBER OF COLORS]-s*. The supported colors are 256, 88, 8 and 0.
+    3. Set the prompt to this format:
   "[Return code if this is not equal to 0 (status OK), printed in error code color] [ Current directory; one directory stated only] [ User/root symbol ] ".
   
   Example:
   
   ![alt text](https://github.com/sebaste/dotfiles/raw/master/images/prompt.png "Prompt example")
+
 33. If the environment variable PAGER is set to "less", perform the following:
-  1. If lesspipe exists, use it as a filter for viewing non-text files.
-  2. If the charmap is UTF-8, set the environment variable LESSCHARSET to UTF-8.
-  3. If the number of colors that the terminal supports is 256, export less termcap color escape sequences from *.shells.d/env.less.termcap.256*.
+    1. If lesspipe exists, use it as a filter for viewing non-text files.
+    2. If the charmap is UTF-8, set the environment variable LESSCHARSET to UTF-8.
+    3. If the number of colors that the terminal supports is 256, export less termcap color escape sequences from *.shells.d/env.less.termcap.256*.
 34. If the number of colors that the terminal supports is 256, evaluate the *.dir_colors* file in the target directory.
 35. Unset all still existing variables and functions that are meant to be local to the shell configuration procedure.
 
