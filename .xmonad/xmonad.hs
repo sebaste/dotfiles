@@ -68,9 +68,9 @@ keys' conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Reset the layouts on the current workspace to default.
     , ((modm .|. mod2,    xK_space ), setLayout $ XMonad.layoutHook conf)
     -- Move focus to the next window.
-    , ((modm,             xK_l     ), windows W.focusDown)
+    , ((modm,             xK_j     ), windows W.focusDown)
     -- Move focus to the previous window.
-    , ((modm,             xK_h     ), windows W.focusUp)
+    , ((modm,             xK_k     ), windows W.focusUp)
     -- Move focus to the master window.
     , ((modm .|. mod2,    xK_Tab   ), windows W.focusMaster)
     -- Swap the focused window and the master window.
@@ -91,9 +91,9 @@ keys' conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,             xK_d     ), sendMessage (IncMasterN (-1)))
 
     -- Move focus to the left screen.
-    , ((modm,             xK_k     ), prevScreen)
+    , ((modm,             xK_h     ), prevScreen)
     -- Move focus to the right screen.
-    , ((modm,             xK_j     ), nextScreen)
+    , ((modm,             xK_l     ), nextScreen)
 
     -- Quit xmonad.
     , ((modm .|. mod2,    xK_Escape), io (exitWith ExitSuccess))
@@ -103,15 +103,16 @@ keys' conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Start programs.
     -- Uses mod1-shift, while keySeqs uses mod1-ctrl.
     , ((modm .|. mod2,    xK_a     ), spawn "audacious")
-    , ((modm .|. mod2,    xK_b     ), spawn "chromium")
+    , ((modm .|. mod2,    xK_b     ), spawn "firefox")
     , ((modm .|. mod2,    xK_c     ), spawn (terminal'++" calc"))
+    , ((modm .|. mod2,    xK_e     ), spawn "gedit")
     , ((modm .|. mod2,    xK_f     ), spawn "filezilla")
     , ((modm .|. mod2,    xK_h     ), spawn (terminal'++" hexedit"))
     , ((modm .|. mod2,    xK_i     ), spawn "gimp")
     , ((modm .|. mod2,    xK_m     ), spawn "mirage")
-    , ((modm .|. mod2,    xK_n     ), spawn "nemo")
+    , ((modm .|. mod2,    xK_n     ), spawn "nautilus")
     , ((modm .|. mod2,    xK_p     ), spawn "evince")
-    , ((modm .|. mod2,    xK_t     ), spawn "deluge")
+    , ((modm .|. mod2,    xK_t     ), spawn "qbittorrent")
     , ((modm .|. mod2,    xK_v     ), spawn "vlc")
     , ((modm .|. mod2,    xK_w     ), spawn (terminal'++" wicd-curses"))
     , ((modm .|. mod2,    xK_x     ), spawn (terminal'++" alsamixer"))
