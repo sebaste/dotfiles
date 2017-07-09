@@ -31,8 +31,7 @@ else
 fi
 
 unset -f _get_escape_seq
-
-PS1="\`__PS1_TMP=\$? && [ \${__PS1_TMP} -ne 0 ] && echo -e ${_COLOR_ERR_CODE}\${__PS1_TMP}${_COLOR_RESET}' ' && unset __PS1_TMP\`\W \`[[ $UID == 0 ]] && echo -e \"${_SYMBOL_ROOT}\" || echo -e \"${_SYMBOL_USER}\"\` "
+PS1="\`__PS1_TMP=\$? && [ \${__PS1_TMP} -ne 0 ] && echo -e ${_COLOR_ERR_CODE}\${__PS1_TMP}${_COLOR_RESET}' ' && unset __PS1_TMP\`\W \`[[ $UID == 0 ]] && echo -e \"${_SYMBOL_ROOT}\" || echo -e \"${_SYMBOL_USER}\" | sed 's/\x00//'\` "
 
 }
 
