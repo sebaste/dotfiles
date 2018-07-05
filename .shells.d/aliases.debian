@@ -9,3 +9,4 @@ aUG         sudo apt-get -u upgrade
 aDUG        sudo apt-get dist-upgrade
 aC          sudo apt-get clean
 aCA         sudo apt-get autoclean
+aS          apt-cache search
