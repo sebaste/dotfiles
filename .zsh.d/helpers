@@ -1,0 +1,73 @@
+#!/bin/zsh
+
+function _line_is_valid {
+    local _LINE=$1
+    if [[ ${_LINE:0:1} == '#' ]] || [ -z "$_LINE" ]; then
+        return 1
+    fi
+    return 0
+}
+
+function _export_from_prio_list {
+    local _EXPORT_NAME=$1
+    local _FILENAME=$2
+    if [ -f $_FILENAME ]; then
+        local _LINE
+        while read _LINE; do
+            _line_is_valid "$_LINE"
+            if [ "$?" != "0" ]; then
+                continue
+            fi
+            if `hash "${_LINE}" 2>/dev/null`; then
+                export "${_EXPORT_NAME}"="${_LINE}"
+                break
+            fi
+        done < $_FILENAME
+    fi
+}
+
+function _read_aliases_file {
+    local _FILENAME=$1
+    if [ -f $_FILENAME ]; then
+        local _LINE
+        local _TOKENS
+        while read _LINE; do
+            _line_is_valid "$_LINE"
+            if [ "$?" != "0" ]; then
+                continue
+            fi
+            _TOKENS=(${(s: :)_LINE})
+            if (( ${+_TOKENS[1]} )); then
+                alias "$_TOKENS[1]"="$_TOKENS[2,-1]"
+            fi
+        done < $_FILENAME
+    fi
+}
+
+function _read_env_file {
+    local _FILENAME=$1
+    if [ -f $_FILENAME ]; then
+        local _LINE
+        local _TOKENS
+        local _FIRST
+        local _REM
+        while read _LINE; do
+            _line_is_valid "$_LINE"
+            if [ "$?" != "0" ]; then
+                continue
+            fi
+            _TOKENS=(${(s: :)_LINE})
+            if (( ${+_TOKENS[1]} )); then
+                _FIRST=$(eval "echo \"${_TOKENS[1]}\"")
+                _REM=$(eval "echo \"${_TOKENS[2,-1]}\"")
+                if [[ -n $2 ]] && [[ $2 == "ANSI-C" ]]; then
+                    # Mimic ANSI-C string processing, for correct exporting of escape sequences.
+                    # Corresponding functionality in Bash/ZSH: $'<escape sequence>'.
+                    export "$_FIRST"=`echo $_REM`
+                else
+                    export "$_FIRST"="$_REM"
+                fi
+            fi
+        done < $_FILENAME
+    fi
+}

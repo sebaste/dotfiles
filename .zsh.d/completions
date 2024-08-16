@@ -1,0 +1,26 @@
+# Make sure that newly installed programs are included into tab completion.
+_force_rehash() { (( CURRENT == 1 )) && rehash return 1 }
+zstyle ':completion:*' completers _force_rehash
+
+# Ask if completion should be shown only if the content is larger than the screen.
+LISTMAX=0
+
+# Do not complete dot files in home directory, unless at least the initial '.' + TAB is provided.
+zstyle -e ':completion:*' ignored-patterns 'if [[ $PWD = ~ ]] && [[ ! $words[-1] == .* ]]; then reply=(.*); fi'
+
+# Color completion.
+zstyle ':completion:*' list-colors ''
+
+# Color ls completions correctly.
+eval $(dircolors)
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Colored kill completion with CPU load and process tree.
+zstyle ':completion:*:kill:*' command 'ps xf -u $USER -o pid,%cpu,cmd'
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+
+# Vim completion.
+zstyle ':completion::*:(vi|vim):*' file-patterns '*.nroff' '*~*.(aux|dvi|log|idx|pdf|rel|out)' '*'
+
+# Enable tab completion from the parent (..) directory.
+zstyle ':completion:*' special-dirs true

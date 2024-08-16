@@ -1,0 +1,38 @@
+#!/bin/bash
+
+define_prompt() {
+
+if [[ "${_CHARMAP}" == "UTF-8" ]]; then
+    # Unicode character recognition: shapecatcher.com.
+    local _SYMBOL_USER=`cat "${_SHELLS_DIR}/prompt.user.unicode-s"`
+    local _SYMBOL_ROOT=`cat "${_SHELLS_DIR}/prompt.root.unicode-s"`
+else
+    local _SYMBOL_USER=`cat "${_SHELLS_DIR}/prompt.user-s"`
+    local _SYMBOL_ROOT=`cat "${_SHELLS_DIR}/prompt.root-s"`
+fi
+
+function _get_escape_seq() {
+    local _FILENAME=$1
+    _VAL='\[\e['$(cat ${_FILENAME})'m\]'
+    _VAL=$(echo "$_VAL" | sed 's/;/\\;/g')
+    echo "$_VAL"
+}
+
+local _COLOR_RESET="\[\e[0m\]"
+local _COLOR_ERR_CODE=""
+if [ $_TERM_NM_COLORS -eq 256 ]; then
+    _COLOR_ERR_CODE=$(_get_escape_seq ${_SHELLS_DIR}/prompt.errcode.256-s)
+elif [ $_TERM_NM_COLORS -eq 88 ]; then
+    _COLOR_ERR_CODE=$(_get_escape_seq ${_SHELLS_DIR}/prompt.errcode.88-s)
+elif [ $_TERM_NM_COLORS -eq 8 ]; then
+    _COLOR_ERR_CODE=$(_get_escape_seq ${_SHELLS_DIR}/prompt.errcode.8-s)
+else
+    _COLOR_RESET=""
+fi
+
+unset -f _get_escape_seq
+PS1="\`__PS1_TMP=\$? && [ \${__PS1_TMP} -ne 0 ] && echo -e ${_COLOR_ERR_CODE}\${__PS1_TMP}${_COLOR_RESET}' ' && unset __PS1_TMP\`\W \`[[ $UID == 0 ]] && echo -e \"${_SYMBOL_ROOT}\" || echo -e \"${_SYMBOL_USER}\" | sed 's/\x00//'\` "
+
+}
+
+define_prompt

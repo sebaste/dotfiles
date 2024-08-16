@@ -1,0 +1,16 @@
+# Page up.
+"\e[5~": history-search-backward
+# Page down.
+"\e[6~": history-search-forward
+
+# Home.
+"\e[1~": beginning-of-line
+# End.
+"\e[4~": end-of-line
+
+# Macros.
+"\C-l":"\C-e | less"
+"\C-g":"\C-e | grep "
+"\C-y":"\C-ayes | "
+"\C-w":"\C-asudo "
+"\C-n":"\C-aman "

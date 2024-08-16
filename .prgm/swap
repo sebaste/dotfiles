@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Swap the content of two files.
+
+_TMPFILE=tmp.$$
+
+[ $# -ne 2 ] && echo "Two files to swap are required as arguments" && exit 1
+[ ! -e $1 ] && echo "File $1 does not exist" && exit 1
+[ ! -e $2 ] && echo "File $2 does not exist" && exit 1
+
+mv $1 $_TMPFILE
+mv $2 $1
+mv $_TMPFILE $2
+
+exit 0

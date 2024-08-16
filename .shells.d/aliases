@@ -1,0 +1,47 @@
+a           alias
+al          alias | less
+c           cd
+c.          cd ..
+c..         cd ../..
+c...        cd ../../..
+c....       cd ../../../..
+c.....      cd ../../../../..
+c......     cd ../../../../../..
+c1          cd ..
+c2          cd ../..
+c3          cd ../../..
+c4          cd ../../../..
+c5          cd ../../../../..
+c6          cd ../../../../../..
+cp          cp -iv
+g           grep --color=auto
+h           history | less +G
+k           kill -15
+kk          kill -9
+la          ls -lsahF
+lc          locate
+l           ls -lshFB
+less        less -R
+lr          ls -lshFBR
+ls          ls --color=auto
+mc          make clean
+m           make
+mv          mv -iv
+nk          killall -i
+p           ps -aux
+pt          pstree -hap | less
+py          python
+rm          rm -iv
+r           rm
+src         source
+t           touch
+ua          unalias
+v           vim
+xmrc        xmonad --recompile && xmonad --restart
+
+# System.
+off         sudo poweroff
+re          sudo reboot
+
+# Network.
+openports   sudo lsof -iTCP -sTCP:listen

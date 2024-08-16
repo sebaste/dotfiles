@@ -1,0 +1,79 @@
+[user]
+    name =
+    email =
+
+[core]
+    pager = less -F -X --RAW-CONTROL-CHARS
+    whitespace = blank-at-eol,blank-at-eof,space-before-tab
+    compression = -1
+    excludesfile = ~/.gitignore
+
+[branch]
+    autosetupmerge = always
+    autosetuprebase = always
+
+[push]
+    default = simple
+
+[merge]
+    tool = vimdiff
+    conflictstyle = diff3
+    prompt = false
+
+[diff]
+    tool = vimdiff
+    mnemonicprefix = true
+
+[url "https://"]
+    insteadOf = git://
+
+[color]
+    ui = true
+    pager = true
+
+[color "status"]
+    header = white dim
+    added = green dim
+    updated = green
+    changed = red bold
+    untracked = red bold
+    nobranch = red bold
+
+[color "branch"]
+    current = green reverse
+    local = white
+    remote = white dim
+    plain = white
+
+[color "grep"]
+    match = white dim reverse
+
+[color "diff"]
+    meta = white reverse
+    plain = white
+    frag = white dim reverse
+    old = red
+    new = green
+    commit = normal
+    whitespace = normal red
+
+[alias]
+    co    = checkout
+    cob   = checkout -b
+    c     = commit
+    st    = status -s
+    br    = branch
+    hi    = log --color --pretty=tformat:\"%C(white dim)%h%Creset %C(white)%ad%Creset %C(white bold)%s%d%Creset %C(white)%an%Creset\" --graph --date=short
+    type  = cat-file -t
+    dump  = cat-file -p
+    last  = !git log -1 HEAD && echo "\n"
+    amend = commit -a --amend
+    p     = pull --rebase --prune
+    cm    = !git add -A :/ && git commit
+    cmm   = !git add -A :/ && git commit -m
+    prev  = reset HEAD~1 --mixed
+    # Commits everything in the working directory and then does a hard reset to remove this commit. This means that the reset performed
+    # can be found in the reflog, instead of being completely erased.
+    wipe  = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+    # Print the list of aliases (in this file).
+    alias = "!sed -n '/\\[alias\\]/,/^\\[/p' ~/.gitconfig | sed '1d' | sed '/^[[:space:]]\\+#/d' | sed 's/^[^=]*/\\x1b[0;33m&\\x1b[0m/g' | sort | less -R"

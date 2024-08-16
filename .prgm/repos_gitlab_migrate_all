@@ -1,0 +1,59 @@
+#!/bin/bash
+
+GITLAB_USER=$1
+GITLAB_TOKEN=$2
+REPO_DIR=$3
+
+if [ -z "$GITLAB_USER" ]
+then
+    echo "Error: No GitLab username provided. Run the script as './script.sh your-gitlab-username your-gitlab-token your-directory'"
+    exit 1
+fi
+
+if [ -z "$GITLAB_TOKEN" ]
+then
+    echo "Error: No GitLab token provided. Run the script as './script.sh your-gitlab-username your-gitlab-token your-directory'"
+    exit 1
+fi
+
+if [ -z "$REPO_DIR" ]
+then
+    echo "Error: No directory provided. Run the script as './script.sh your-gitlab-username your-gitlab-token your-directory'"
+    exit 1
+fi
+
+for dir in "$REPO_DIR"/*/
+do
+    # Get just the directory name, not the full path.
+    repo_name=$(basename "$dir")
+
+    # Check if the repository already exists on GitLab.
+    repo_exists=$(curl --silent --header "PRIVATE-TOKEN: $GITLAB_TOKEN" "https://gitlab.com/api/v4/projects/$GITLAB_USER%2F$repo_name")
+
+    # If the repository does not exist.
+    if [[ $repo_exists == *"404 Project Not Found"* ]]; then
+        # Create a new repository on GitLab.
+        curl -X POST --header "PRIVATE-TOKEN: $GITLAB_TOKEN" "https://gitlab.com/api/v4/projects?name=$repo_name"
+
+        # Change into the local directory.
+        cd "$dir"
+
+        # Remove any existing .git directory.
+        if [ -d .git ]; then
+            rm -rf .git
+        fi
+
+        # Initialize the local directory as a Git repository, add all files, and commit.
+        git init
+        git add .
+        git commit -m "Initial commit"
+
+        # Add the GitLab repository as a remote and push to it.
+        git remote add origin "git@gitlab.com:$GITLAB_USER/$repo_name.git"
+        git push -u origin master
+
+        # Change back to the original directory.
+        cd -
+    fi
+done
+

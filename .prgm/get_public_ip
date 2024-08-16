@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if ! `hash curl 2>/dev/null`; then
+    echo "curl is not installed" >&2
+    exit 1
+elif ! `hash python 2>/dev/null`; then
+    echo "python is not installed" >&2
+    exit 1
+fi
+
+_get_json_val()
+{
+    python -c 'import sys; import json;   \
+        j = json.loads(sys.stdin.read()); \
+        print j'$1';'
+}
+
+_URL="http://jsonip.com/"
+curl --silent "$_URL" | _get_json_val '["ip"]'
+_ret_code=$?
+unset -f _get_json_val
+if (( $_ret_code != 0 )); then
+    echo "curl failed to get public IP address from $_URL" >&2
+    exit 1
+fi
+
+exit 0

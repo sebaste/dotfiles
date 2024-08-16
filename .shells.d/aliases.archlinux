@@ -1,0 +1,35 @@
+pS          sudo pacman -S
+pR          sudo pacman -R
+pRS         sudo pacman -Rs
+# Full system upgrade.
+pSU         sudo pacman -Su
+# Sync rep databases & do a full system upgrade.
+pSYU        sudo pacman -Syu
+# Sync repository databases.
+pSYY        sudo pacman -Syy
+# Search for package(s) in the database.
+pSS         sudo pacman -Ss
+# Search for already installed packages.
+pQS         sudo pacman -Qs
+# Display extensive information about a given package.
+pSI         sudo pacman -Si
+# List all explicitly installed packages.
+pQE         pacman -Qe
+# List all packages no longer required as dependencies (orphans).
+pQDT        pacman -Qdt
+# Download a package wihout installing it.
+pSW         sudo pacman -Sw
+# Install a 'local'/'remote' package that is not from a repository (.pkg.tar.xz).
+pU          sudo pacman -U
+# Clean the package cache of packages that are not currently installed.
+pSC         sudo pacman -Sc
+# Clean the entire package cache.
+pSCC        sudo pacman -Scc
+
+# List installed AUR packages.
+pQM         pacman -Qm
+yS          yaourt -S
+yR          yaourt -R
+yC          yaourt -C
+yU          yaourt -U
+yQ          yaourt -Q

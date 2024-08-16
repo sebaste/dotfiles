@@ -1,0 +1,74 @@
+# No beep on errors.
+setopt no_beep
+
+# Allow comments even in interactive shells.
+setopt interactive_comments
+
+# Implicit cd.
+setopt auto_cd
+
+# No directory duplications can be pushed into the directory stack.
+setopt pushd_ignore_dups
+
+# Let multiple terminal sessions append to the same ZSH command history.
+setopt append_history
+
+# Add commands as they are typed to the history - do not wait until shell termination.
+setopt inc_append_history
+
+# When trimming the history, delete the oldest duplicate(s) first.
+setopt hist_expire_dups_first
+
+# Do not write duplicate commands to the history.
+setopt hist_ignore_dups
+
+# If the first character on the line is a whitespace, do not write the command to history.
+setopt hist_ignore_space
+
+# Trim away extra whitespaces from each command that is added to history.
+setopt hist_reduce_blanks
+
+#setopt hist_verify
+#setopt share_history
+
+# Enable spelling correction for commands.
+setopt correct
+
+# Enable spelling correction for arguments.
+setopt correctall
+
+# If completion target is a directory, auto-append a slash.
+setopt auto_param_slash
+
+# Always make sure that the entire command path is hashed.
+#setopt hash_list_all
+
+# "for i in *; echo $i;" possible instead of "for i in *; do echo $i; done".
+setopt short_loops
+
+# Show compact completion list.
+#setopt list_packed
+
+# Show job number and PID when suspending.
+setopt long_list_jobs
+
+# Inhibits "cat > f" if file f exists. "cat >! f" can be used to override this.
+setopt no_clobber
+
+#setopt extended_glob
+
+# Enable numeric order in globs.
+#setopt numeric_glob_sort
+
+
+
+#always_to_end
+#auto_menu
+#auto_name_dirs
+#complete_in_word
+
+#prompt_subst
+#transient_rprompt
+
+# Perform tee/cat operations implicitly when multiple redirections are attempted.
+#multios

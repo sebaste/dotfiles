@@ -1,0 +1,7 @@
+# Auto-completion.
+complete -cf sudo
+complete -cf man
+
+if `hash git 2>/dev/null`; then
+    . $_BASH_DIR/git-completion.bash
+fi

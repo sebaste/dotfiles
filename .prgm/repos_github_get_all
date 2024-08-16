@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Requirement(s):
+# * SSH key set up with GitHub.
+
+GITHUB_USER=$1
+GITHUB_TOKEN=$2
+CLONE_DIRECTORY=$3
+
+if [ -z "$GITHUB_USER" ]
+then
+    echo "Error: No GitHub username provided. Run the script as './script.sh your-username your-token your-directory'"
+    exit 1
+fi
+
+if [ -z "$GITHUB_TOKEN" ]
+then
+    echo "Error: No GitHub token provided. Run the script as './script.sh your-username your-token your-directory'"
+    exit 1
+fi
+
+if [ -z "$CLONE_DIRECTORY" ]
+then
+    echo "Error: No directory provided. Run the script as './script.sh your-username your-token your-directory'"
+    exit 1
+fi
+
+mkdir -p $CLONE_DIRECTORY
+
+page=1
+last_page=1
+
+while true
+do
+  response=$(curl -u $GITHUB_USER:$GITHUB_TOKEN "https://api.github.com/user/repos?page=$page&per_page=100" -sI)
+  last_page=$(echo "$response" | grep -E "^Link:" | sed -e 's/^Link:.*page=//g' -e 's/>.*$//g' -e 's/;.*$//g' -e 's/>.*page=//g')
+  ssh_urls=$(curl -u $GITHUB_USER:$GITHUB_TOKEN "https://api.github.com/user/repos?page=$page&per_page=100" | grep -Po 'ssh_url": "\K.*?(?=")')
+
+  for url in $ssh_urls; do
+    repo_name=$(echo "$url" | awk -F '/' '{print $NF}' | cut -d'.' -f 1)
+    if [ ! -d "$CLONE_DIRECTORY/$repo_name" ]; then
+      git clone "$url" "$CLONE_DIRECTORY/$repo_name"
+    fi
+  done
+
+  if [ -z "$last_page" ] || [ "$page" -ge "$last_page" ]; then
+    break
+  fi
+  page=$((page+1))
+done
+

@@ -1,0 +1,53 @@
+#!bin/csh -f 
+
+set implicitcd
+
+if ( $?tcsh ) then
+    # Disable the complete rule for mv (that limits autocomplete to 2 arguments).
+    uncomplete mv
+
+    # Set the pager to the last one found.
+    which more > /dev/null && setenv PAGER more
+    which most > /dev/null && setenv PAGER most
+    which less > /dev/null && setenv PAGER less
+
+    # Let pushd remove any instance of <name> from the stack before pushing it onto the stack.
+    set dunique
+
+    # The number of killed strings (from editor commands) to keep in memory.
+    set killring = 128
+
+    # If set, all jobs are listed when a job is suspended. If set to "long", the listing is in long format.
+    set listjobs = long
+    
+    # The maximum number of items which the list-choices editor command will list without asking first.
+    set listmax = 128
+
+    set _TERM_ROWS = 32
+    which tput >&/dev/null
+    if ( $status == 0 ) then
+        set _TERM_ROWS = `tput lines`
+        if ( $_TERM_ROWS > 4 ) then
+            @ _TERM_ROWS -= 2
+        endif
+    endif
+    # The maximum number of rows of items which the list-choices editor command will list without asking first.
+    # FIXME: testing of this is required.
+    set listmaxrows = $_TERM_ROWS
+    unset _TERM_ROWS
+
+    set nobeep
+
+    # If set, restrictions are placed on output redirection to insure that files are not accidentally
+    # destroyed and that ">>" redirections refer to existing files.
+    set noclobber
+
+    # If set, pushd without arguments does "pushd ~".
+    set pushdtohome
+
+    # If set, various key bindings change behavior to be more vi-style.
+    set vimode
+else
+    # Use filename completion.
+    set filec
+endif

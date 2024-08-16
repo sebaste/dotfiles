@@ -1,0 +1,2 @@
+ t0 synclient touchpadOff=0
+ t1 synclient touchpadOff=1

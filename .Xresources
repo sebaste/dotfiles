@@ -1,0 +1,77 @@
+! DPI: http://dpi.lv/
+Xft.dpi: 94
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.autohint: 1
+Xft.lcdfilter: lcddefault
+
+XTerm*faceName: Latin Modern Mono:size=12
+XTerm*termName: xterm-256color
+XTerm*VT100.geometry: 100x60
+XTerm*foreground: white
+XTerm*background: black
+XTerm*saveLines: 65536
+XTerm*multiScroll: true
+XTerm*jumpScroll: true
+XTerm*scrollBar: false
+! Scroll down when a key is pressed.
+XTerm*scrollKey: true
+XTerm*xftAntialias: true
+XTerm*renderFont: true
+! Make certain your locale settings are correct for UTF-8. This line will then make
+! XTerm interpret all incoming data as UTF-8 encoded.
+XTerm*locale: true
+XTerm*utf8: 1
+XTerm*cursorBlink: false
+! Fix alt-key inputting.
+XTerm*eightBitInput: false
+XTerm*metaSendsEscape: true
+! Do not scroll with new terminal output.
+XTerm*ScrollTtyOutput: false
+! Allow selecting email/URL by double-clicking.
+XTerm*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+
+URxvt*font: xft:Liberation Mono:pixelsize=12
+URxvt*boldFont: xft:Liberation Mono:pixelsize=12:style=Bold
+URxvt*italicFont: xft:Liberation Mono:pixelsize=12:style=Italic
+URxvt*boldItalicFont: xft:Liberation Mono:pixelsize=12:style=Bold:style=Italic
+URxvt*termName: xterm-256color
+URxvt*geometry: 100x60
+! Needed for true transparency. The window manager also needs to support
+! compositing or a separate compositor.
+URxvt*depth: 32
+URxvt*internalBorder: 3
+URxvt*externalBorder: 0
+! Fade the text by the given percentage when focus is lost.
+URxvt*fading: 10
+URxvt*tintColor: white
+URxvt*saveLines: 65536
+URxvt*scrollBar: true
+URxvt*scrollstyle: plain
+URxvt*scrollColor: #3A3A3A
+URxvt*foreground: white
+! The alpha values control the transparency.
+URxvt*background: rgba:1111/1111/1111/dddd
+! Disable the CTRL+SHIFT shortcut that enters ISO14755 mode.
+URxvt*iso14755: false
+! Do not scroll with new terminal output.
+URxvt*scrollTtyOutput: false
+! Scroll in relation to buffer (with mouse scroll or Shift+Page Up/Down).
+URxvt*scrollWithBuffer: true
+! Scroll to the bottom on key press.
+URxvt*scrollTtyKeypress: true
+! By default, URxvt uses the same colors as XTerm except one. Set this to
+! make the colors identical to that of XTerm.
+URxvt*color12: rgb:5c/5c/ff
+
+aterm*background: black
+aterm*foreground: yellow
+aterm*transparent: true
+aterm*shading: 30
+aterm*cursorColor: gray
+aterm*saveLines: 65536
+aterm*scrollBar: false
+aterm*transpscrollbar: true
+

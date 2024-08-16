@@ -1,0 +1,12 @@
+aI          sudo apt-get install
+aIY         sudo apt-get install -y
+aIR         sudo apt-get --reinstall install
+aIRY        sudo apt-get --reinstall install -y
+aR          sudo apt-get remove
+aRP         sudo apt-get --purge remove
+aUD         sudo apt-get update
+aUG         sudo apt-get -u upgrade
+aDUG        sudo apt-get dist-upgrade
+aC          sudo apt-get clean
+aCA         sudo apt-get autoclean
+aS          apt-cache search

@@ -1,0 +1,17 @@
+# Correct minor errors in the spelling of a directory component in a cd command.
+shopt -s cdspell
+
+# Check the window size after each command and, if necessary, update the values
+# of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# Append the history list to the history file when the shell exits, rather than
+# overwriting the history file.
+shopt -s histappend
+# Append every line to history individually.
+PROMPT_COMMAND="history -a"
+# With the two settings above, a new shell will get the history lines from all
+# previous shells instead of the default "last window closed" > history.
+
+# List all jobs after backgrounding.
+set listjobs
